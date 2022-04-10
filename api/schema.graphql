@@ -21,12 +21,22 @@ input ProductInputs {
     product_image: String
 }
 
-##### Top level declarations
+
+input ProductUpdateInputs {
+  name: String
+  category: Category
+  price: Float
+  imageUrl: String
+}
+
 
 type Query {
   productList: [Product!]!
+  product(id: Int!): Product!
 }
 
 type Mutation {
   addProduct(product: ProductInputs!): Product!
+  deleteProduct(id: Int!): Boolean!
+  updateProduct(id: Int!, changes: ProductUpdateInputs!): Product!
 }
