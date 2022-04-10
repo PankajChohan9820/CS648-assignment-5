@@ -1,6 +1,6 @@
 import React from 'react';
 
-import fetchGraphQl from './fetchGraphQl.jsx';
+import fetchGraphQl from './fetchGraphQl.js';
 import numInp from './numInp.jsx';
 import textInp from './textInp.jsx';
 
