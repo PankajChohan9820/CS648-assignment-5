@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 const NO_DATA_AVAILABLE = 'No Data Available';
 
-function productTableRow({ product, deleteProduct, index }) {
+function ProductTableRow({ product, deleteProduct, index }) {
   const {
-    product_name, product_price, product_category, product_img, product_id,
+    product_name, product_price, product_category, product_image, product_id,
   } = product;
   return (
     <tr>
       <td>{product_name || NO_DATA_AVAILABLE}</td>
       <td>{product_price ? `$${product_price}` : NO_DATA_AVAILABLE}</td>
       <td>{product_category}</td>
-      <td>{product_img ? <Link to={`/img/${product_id}`}>View</Link> : NO_DATA_AVAILABLE}</td>
+      <td>{product_image ? <Link to={`/img/${product_id}`}>View</Link> : NO_DATA_AVAILABLE}</td>
       <td>
         <Link to={`/edit/${product_id}`}>Edit</Link>
         {' | '}
@@ -24,12 +24,12 @@ function productTableRow({ product, deleteProduct, index }) {
   );
 }
 
-export default function productTable({
+export default function ProductTable({
   headings, products, loading, deleteProduct,
 }) {
-  const productTableRows = products.map(
+  const ProductTableRows = products.map(
     (product, index) => (
-      <productTableRow
+      <ProductTableRow
         key={product.product_id}
         product={product}
         deleteProduct={deleteProduct}
@@ -37,7 +37,7 @@ export default function productTable({
       />
     ),
   );
-  const initialTableMessage = loading ? 'Loading products...' : 'No Products added yet';
+  const initialTableMessage = loading ? 'Loading products...' : 'Add Products here';
 
   return (
     <table className="table">
@@ -52,7 +52,7 @@ export default function productTable({
       </thead>
 
       <tbody>
-        {products.length > 0 ? productTableRows : (
+        {products.length > 0 ? ProductTableRows : (
           <tr className="text-center"><td colSpan="5">{initialTableMessage}</td></tr>
         )}
       </tbody>

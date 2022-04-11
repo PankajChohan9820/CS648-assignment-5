@@ -1,5 +1,14 @@
 import React from 'react';
 
+const productTableHeadings = ['Product Name', 'Price', 'Category', 'Image'];
+const productCategories = [
+  { product_id: 1, product_name: 'Shirts' },
+  { product_id: 2, product_name: 'Jeans' },
+  { product_id: 3, product_name: 'Jackets' },
+  { product_id: 4, product_name: 'Sweaters' },
+  { product_id: 5, product_name: 'Accessories' },
+];
+
 export default class ProductAdd extends React.Component {
     constructor() {
       super();
@@ -17,6 +26,7 @@ export default class ProductAdd extends React.Component {
         product_name, product_price, product_category, product_image,
       } = document.forms.addProduct;
       const priceWithoutDollar = product_price.value.substring(1); // Getting value without '$'
+      console.log("Hello",product_name.value, product_price.value, product_category.value, product_image.value)
   
       const product = {
         product_name: product_name.value,
@@ -24,6 +34,7 @@ export default class ProductAdd extends React.Component {
         product_category: product_category.value,
         product_image: product_image.value,
       };
+      
       addProduct(product);
   
       product_name.value = '';

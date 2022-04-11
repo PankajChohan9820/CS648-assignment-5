@@ -25,9 +25,11 @@ async function CounteridForDocument(product_name) {
     .collection(COUNTERS)
     .findOneAndUpdate(
       { _id: product_name },
-      { $inc: { Counter_id: 1 },$set: { _id: product_name } },
-      { returnOriginal: false, upsert: true  },
+      { $inc: { Counter_id: 1 } },
+      { returnOriginal: false },
     );
+
+  console.log("DATA  :: ", result.value )
   return result.value.Counter_id;
 }
 

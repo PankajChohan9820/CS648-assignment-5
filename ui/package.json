@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run compile && nodemon -w uiserver.js -w .env uiserver.js",
     "lint": "eslint . --ext js,jsx --ignore-pattern public",
-    "compile": "babel src --out-dir public",
+    "compile": "webpack --mode production",
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

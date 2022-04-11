@@ -16,8 +16,9 @@ const add = async (_, { product }) => {
   const db = getDb();
   // eslint-disable-next-line no-param-reassign
   product.product_id = await CounteridForDocument(PRODUCTS);
-
+  console.log("PRODUCT :: ",product);
   const result = await db.collection(PRODUCTS).insertOne(product);
+  // console.log("RES :: ", result)
   return db
     .collection(PRODUCTS)
     .findOne({ _id: result.insertedId });

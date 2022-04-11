@@ -1,10 +1,10 @@
 import React from 'react';
 
 import fetchGraphQl from './fetchGraphQl.js';
-import numInp from './numInp.jsx';
-import textInp from './textInp.jsx';
+import NumInp from './NumInp.jsx';
+import TextInp from './TextInp.jsx';
 
-export default class productEdit extends React.Component {
+export default class ProductEdit extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -28,18 +28,18 @@ export default class productEdit extends React.Component {
   }
 
   onChange(event, naturalValue) {
-    const { product_name, value: textValue } = event.target;
+    const { name, value: textValue } = event.target;
     const value = naturalValue === undefined ? textValue : naturalValue;
 
     this.setState(prevState => ({
-      product: { ...prevState.product, [product_name]: value },
+      product: { ...prevState.product, [name]: value },
     }));
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     const { product } = this.state;
-
+    console.log("Submitting form :: ",this.state)
     const query = `mutation updateProduct(
       $product_id: Int!
       $changes: ProductUpdateInputs!
@@ -48,11 +48,12 @@ export default class productEdit extends React.Component {
         product_id: $product_id
         changes: $changes
       ) {
-        product_id product_name product_category product_price product_img
+        product_id product_name product_category product_price product_image
       }
     }`;
 
     const { product_id, ...changes } = product;
+    console.log("Changes :: ", changes);
     const data = await fetchGraphQl(query, { product_id, changes });
     if (data) {
       this.setState({ product: data.updateProduct });
@@ -63,7 +64,7 @@ export default class productEdit extends React.Component {
   async loadData() {
     const query = `query product($product_id: Int!) {
       product(product_id: $product_id) {
-        product_id product_name product_category product_price product_img
+        product_id product_name product_category product_price product_image
       }
     }`;
 
@@ -74,7 +75,7 @@ export default class productEdit extends React.Component {
       product.product_name = product.product_name != null ? product.product_name : '';
       product.product_category = product.product_category != null ? product.product_category : '';
       product.product_price = product.product_price != null ? product.product_price : '';
-      product.product_img = product.product_img != null ? product.product_img : '';
+      product.product_image = product.product_image != null ? product.product_image : '';
       this.setState({ product, isLoading: false });
     } else {
       this.setState({ product: {}, isLoading: false });
@@ -98,7 +99,7 @@ export default class productEdit extends React.Component {
 
     const {
       product: {
-        product_name, product_category, product_price, product_img,
+        product_name, product_category, product_price, product_image,
       },
     } = this.state;
 
@@ -110,8 +111,8 @@ export default class productEdit extends React.Component {
             <tr>
               <td className="padding-right-20">Name</td>
               <td>
-                <textInp
-                  product_name="product_name"
+                <TextInp
+                  name="product_name"
                   value={product_name}
                   onChange={this.onChange}
                   key={product_id}
@@ -133,8 +134,8 @@ export default class productEdit extends React.Component {
             <tr>
               <td className="padding-right-20">Price</td>
               <td>
-                <numInp
-                  product_name="product_price"
+                <NumInp
+                  name="product_price"
                   value={product_price}
                   onChange={this.onChange}
                   key={product_id}
@@ -145,9 +146,9 @@ export default class productEdit extends React.Component {
             <tr>
               <td className="padding-right-20">Image Url</td>
               <td>
-                <textInp
-                  product_name="product_img"
-                  value={product_img}
+                <TextInp
+                  name="product_image"
+                  value={product_image}
                   onChange={this.onChange}
                   key={product_id}
                 />

@@ -16,27 +16,27 @@ type Product {
 
 input ProductInputs {
     product_name: String
-    product_category: Category!
-    product_price: Float
+    product_category: Category
+    product_price: Float!
     product_image: String
 }
 
 
 input ProductUpdateInputs {
-  name: String
-  category: Category
-  price: Float
-  imageUrl: String
+  product_name: String
+  product_category: Category
+  product_price: Float
+  product_image: String
 }
 
 
 type Query {
   productList: [Product!]!
-  product(id: Int!): Product!
+  product(product_id: Int!): Product!
 }
 
 type Mutation {
   addProduct(product: ProductInputs!): Product!
-  deleteProduct(id: Int!): Boolean!
-  updateProduct(id: Int!, changes: ProductUpdateInputs!): Product!
+  deleteProduct(product_id: Int!): Boolean!
+  updateProduct(product_id: Int!, changes: ProductUpdateInputs!): Product!
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import fetchGraphQl from './fetchGraphQl.js';
 
-export default class productImg extends React.Component {
+export default class ProductImg extends React.Component {
   constructor() {
     super();
     this.state = { product: {} };
@@ -22,9 +22,10 @@ export default class productImg extends React.Component {
 
   async loadData() {
     const { match: { params: { product_id } } } = this.props;
+    console.log(product_id)
     const query = `query product($product_id: Int!) {
       product (product_id: $product_id) {
-        product_id product_name product_img
+        product_id product_name product_image
       }
     }`;
 
@@ -37,22 +38,22 @@ export default class productImg extends React.Component {
   }
 
   render() {
-    const { product: { product_id, product_name, product_img } } = this.state;
+    const { product: { product_id, product_name, product_image } } = this.state;
 
     if (!product_id) {
       return (<p>{`Product with Id ${product_id} not present in the Database`}</p>);
     }
 
-    if (!product_img) {
+    if (!product_image) {
       return (
-        <p>{`No Image Url set for Product with id ${id}`}</p>
+        <p>{`No Image Url set for Product with id ${product_id}`}</p>
       );
     }
 
     return (
       <div>
         <h3>{`Viewing Image of Product with name - ${product_name}`}</h3>
-        <img src={product_img} alt={`Product id ${product_id}`} />
+        <img src={product_image} alt={`Product id ${product_id}`} />
       </div>
     );
   }

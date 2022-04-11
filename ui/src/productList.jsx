@@ -5,10 +5,10 @@ import fetchGraphQl from './fetchGraphQl.js';
 
 const productTableHeadings = ['Product Name', 'Price', 'Category', 'Image'];
 
-export default class productList extends React.Component {
+export default class ProductList extends React.Component {
   constructor() {
     super();
-    this.state = { products: [], initialLoading: true };
+    this.state = { products: [], initialLoading: false };
     this.addProduct = this.addProduct.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
   }
@@ -25,13 +25,13 @@ export default class productList extends React.Component {
                     product_name
                     product_category
                     product_price
-                    product_img
+                    product_image
                 }
             }
         `;
 
     const data = await fetchGraphQl(query);
-
+    console.log(data);
     if (data) {
       this.setState({ products: data.productList, initialLoading: false });
     }

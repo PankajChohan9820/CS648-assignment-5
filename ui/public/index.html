@@ -8,16 +8,6 @@
 
     <title>Inventory Management System</title>
 
-    <!-- React packages -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
-    <!-- Pollyfill for older browsers support -->
-    <script src="https://unpkg.com/@babel/polyfill@7/dist/polyfill.min.js"></script>
-
-    <!-- To use fetch on Older browsers -->
-    <script src="https://unpkg.com/whatwg-fetch@3.0.0/dist/fetch.umd.js"></script>
-
     <!-- Google font - Roboto -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
@@ -29,8 +19,9 @@
 <body>
     <div id="root"></div>
 
-    <script type="module" src="/env.js"></script>
-    <script type="module" src="/App.js"></script>
+    <script src="/env.js"></script>
+    <script src="/app.bundle.js"></script>
+    <script src="/vendor.bundle.js"></script>
 </body>
 
 </html>
